@@ -58,4 +58,8 @@ public class ElectricityMeter {
     void setElectricityTariffEndHour(int electricityTariffEndHour) {
         this.electricityTariffEndHour = electricityTariffEndHour;
     }
+
+    public float getKwh() {
+        return kwh;
+    }
 }
