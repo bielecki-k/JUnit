@@ -1,0 +1,5 @@
+# Project exclude paths
+/.gradle/
+/currentMeterTests/build/
+/currentMeterTests/build/classes/java/main/
+/currentMeterTests/build/classes/java/test/
