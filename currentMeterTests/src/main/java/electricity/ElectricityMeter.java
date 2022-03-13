@@ -62,4 +62,14 @@ public class ElectricityMeter {
     public float getKwh() {
         return kwh;
     }
+    public void reset(){
+        kwh = 0;
+        centsForKwh = 0;
+        tariffOn = false;
+        kwhTariff = 0;
+        centsForTariff = 0;
+        electricityTariffStartHour = 0;
+        electricityTariffEndHour = 0;
+    }
+
 }
