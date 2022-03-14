@@ -11,6 +11,8 @@ import java.util.Calendar;
 
 public class ElectricityMeter {
 
+    TariffProvider tp;
+
     private float kwh = 0;
     private int centsForKwh = 0;
 
@@ -21,6 +23,18 @@ public class ElectricityMeter {
     private int electricityTariffStartHour = 0;
     private int electricityTariffEndHour = 0;
 
+    public ElectricityMeter() {
+        tp = () -> {
+            Calendar rightNow = Calendar.getInstance();
+            int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+            return hour > electricityTariffStartHour && hour < electricityTariffEndHour;
+        };
+    }
+
+    public ElectricityMeter(TariffProvider tp) {
+        this.tp = tp;
+    }
+
     public void addKwh(float kwhToAdd){
         if(isTariffNow()){
             kwhTariff +=kwhToAdd;
@@ -29,11 +43,14 @@ public class ElectricityMeter {
         }
     }
 
-    private boolean isTariffNow() {
-        Calendar rightNow = Calendar.getInstance();
-        int hour = rightNow.get(Calendar.HOUR_OF_DAY);
-        return hour > electricityTariffStartHour && hour < electricityTariffEndHour;
+    public boolean isTariffNow() {
+        return tp.isTariffNow();
     }
+//    public boolean isTariffNow() {
+//        Calendar rightNow = Calendar.getInstance();
+//        int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+//        return hour > electricityTariffStartHour && hour < electricityTariffEndHour;
+//    }
 
     int getHowMoreExpensiveNormalIs(){
         return (centsForKwh * 100 / centsForTariff) - 100;
@@ -62,6 +79,11 @@ public class ElectricityMeter {
     public float getKwh() {
         return kwh;
     }
+
+    public float getKwhTariff() {
+        return kwhTariff;
+    }
+
     public void reset(){
         kwh = 0;
         centsForKwh = 0;

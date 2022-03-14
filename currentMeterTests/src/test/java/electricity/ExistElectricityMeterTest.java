@@ -35,9 +35,11 @@ class ExistElectricityMeterTest {
 
     @Test
     void addKwh_newMeter2_properAddition() {
+
+
         electricityMeter.addKwh(1);
-        electricityMeter.addKwh(4);
-        assertEquals(105, electricityMeter.getKwh());
+        electricityMeter.addKwh(3);
+        assertEquals(104, electricityMeter.getKwh());
     }
 
 
